@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -16,7 +17,23 @@
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
+        <!-- Defines the Java version used by the project -->
         <java.version>17</java.version>
+
+        <!-- Defines the JaCoCo version used for measuring test code coverage -->
+        <jacoco.version>0.8.11</jacoco.version>
+
+        <!-- Identifies the project in SonarCloud for code quality analysis -->
+        <sonar.projectKey>cloudsphere360_ecommerce-Service</sonar.projectKey>
+
+        <!-- Identifies the SonarCloud organization where the project belongs -->
+        <sonar.organization>cloudsphere360</sonar.organization>
+
+        <!-- Defines the SonarCloud server where code analysis results are sent -->
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+        <!-- Specifies the location of compiled Java classes required by SonarCloud -->
+        <sonar.java.binaries>target/classes</sonar.java.binaries>
     </properties>
 
     <dependencies>
@@ -24,14 +41,53 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.11</version>
+
+                <executions>
+
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.10.0.2594</version>
+            </plugin>
+
         </plugins>
     </build>
+
 </project>
