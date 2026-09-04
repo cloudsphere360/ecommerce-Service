@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ProductControllerTest {
 
-    private final ProdusctController controller = new ProductController();
+    private final ProductController controller = new ProductController();
 
     @Test
     void homeShouldReturnWelcomeMessage() {
